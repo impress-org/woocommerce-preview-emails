@@ -1,6 +1,8 @@
 # WooCommerce Preview Emails
 The easiest way to preview your WooCommerce emails as a reference while you customize them in your theme.
 
+[See full write-up about Customizing and Previewing WooCommerce Emails here](https://wordimpress.com/customize-and-preview-woocommerce-emails/)
+
 **The Problem**
 
 WooCommerce enables you to customize your emails very easily, except for one important detail: You can't preview the email without triggering it to be sent to your email address.
@@ -19,7 +21,7 @@ This snippet does two things for you:
 * Code editor of your choice
 
 #STEP 1: Clone Repo and Copy "emails" folder to your theme
-Clone or download and extract this repository into your theme's `my-theme/woocommerce` directory. Got that done? Ok great, now copy the contents of the `emails` directory from `woocommerce/templates` into the `my-theme/woocommerce/emails/` directory. The end result should look like this:
+Clone or download and extract this repository into your theme's `my-theme/woocommerce` directory. The end result should look like this:
 
 * your-theme (folder)
  - woocommerce (folder)
