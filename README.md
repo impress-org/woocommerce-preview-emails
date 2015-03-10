@@ -18,8 +18,8 @@ This snippet does two things for you:
 * FTP/SSH access or localhost environment
 * Code editor of your choice
 
-#STEP 1: Copy "emails" folder to your theme
-After either cloning this repository, or downloading and extracting the zip file, move the entire `emails` folder and its contents into your theme within the `woocommerce` folder. The end result should look like this:
+#STEP 1: Clone Repo and Copy "emails" folder to your theme
+Clone or download and extract this repository into your theme's `my-theme/woocommerce` directory. Got that done? Ok great, now copy the contents of the `emails` directory from `woocommerce/templates` into the `my-theme/woocommerce/emails/` directory. The end result should look like this:
 
 * your-theme (folder)
  - woocommerce (folder)
@@ -64,7 +64,7 @@ The other thing I did was change the table widths so that the template is respon
 In WooCommerce 2.3+, the principle is exactly the same as any other customizeable template. WooCommerce keeps them in the `templates\emails` folder. Copy them into the `woocommerce\emails` and edit to your hearts content.
 3. **Can you help me customize my email templates**  
 Sorry, this is made publicly and freely available to help developers build awesome websites for their clients. Naturally though, if there's a problem with the actual functionality of this drop-in code let us know and we'll work it out.
-4. **I took your code and extended it to do even more. Can I do a pull request**  
+4. **I took your code and extended it to do even more. Can I do a pull request?**  
 Sure! We'd love to see how this code helps others do even more cool stuff.
 
 
