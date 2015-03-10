@@ -22,7 +22,22 @@ if ( ! defined( 'ABSPATH' ) ) {
         <title><?php echo get_bloginfo( 'name' ); ?></title>
 		<style>
 			@import url(http://fonts.googleapis.com/css?family=Lato:400,900);
-			<?php wc_get_template( 'emails/email-styles.php');?>
+			<?php 
+			/*  This is normally not needed because 
+			 *  WooCommerce inserts it into your templates
+			 *  automatically. It's here so the styles
+			 *  get applied to the preview correctly.
+			 */			
+			
+			wc_get_template( 'emails/email-styles.php');
+			
+			/* Custom styles can be added here
+			  * NOTE: Don't add inline comments in your styles, 
+			  * they will break the template.
+			  */
+			$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+			if (strpos($url,'admin-ajax.php') !== false){
+			?>
 			#template_container {
 				max-width: 640px;
 			}
@@ -147,6 +162,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					left: 10%;
 				}
 			}
+			<?php } ?>
 		</style>
 	</head>
     <body <?php echo is_rtl() ? 'rightmargin' : 'leftmargin'; ?>="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">

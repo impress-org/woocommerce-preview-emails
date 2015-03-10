@@ -67,14 +67,22 @@ $credit = "
             </table>
         </div>
 		<?php
+		/* This makes sure the JS is
+		 * only loaded on the preview page
+		 * don't remove it.
+		 */
 		$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
 		if (strpos($url,'admin-ajax.php') !== false){ ?>
+			//We need jQuery for some of the preview functionality
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 			<script language="javascript">
+			//This sets the order value for the query string
 			function process1(showed) {
 				document.getElementById("setorder").value = showed.value;
 					$("#ordernum").attr("value", getQueryVariable("order"));
 			}
+			// This shows the order field
+			// conditionally based on the select field
 			$(document).ready(function(){
 				$("#email-select").change(function(){
 					$( "select option:selected").each(function(){
@@ -89,6 +97,8 @@ $credit = "
 					});
 				}).change();
 			});
+			
+			//This gets the info from the query string
 			function getUrlVars()
 			{
 				var vars = [], hash;
@@ -105,10 +115,14 @@ $credit = "
 			}
 			var order = getUrlVars()["order"];
 			var file = getUrlVars()["file"];
-
+			
+			// This populates the fields 
+			// from the data in the query string
 			$("form input#order").val(decodeURI(order));
 			$('select#email-select').val(decodeURI(file));
 			</script>
-		<?php } ?>
+		<?php } 
+		// Everything below here will be output into the email directly
+		?>
     </body>
 </html>
