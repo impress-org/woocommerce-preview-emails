@@ -41,7 +41,10 @@ Now you need to require the `woo-preview-emails.php` file in your themes `functi
 * @author WordImpress.com
 * @url https://github.com/WordImpress/woocommerce-preview-emails
 */
-require 'woocommerce/emails/woo-preview-emails.php';
+$preview = 'woocommerce/emails/woo-preview-emails.php';
+if(file_exists($preview)) {
+    require $preview;
+}
 ```
 
 **NOTE:** If your theme or child theme puts functions in a sub-folder, you'll need to update that path to point to the `woocommerce/emails` folder, it just has to be a relative path. For 90% of all WordPress themes if you just put that in your root functions.php file in your theme you'll be gold.
