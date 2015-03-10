@@ -12,14 +12,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<head>
+<!-- If you delete this meta tag, the ground will open and swallow you. -->
+<meta name="viewport" content="width=device-width" />
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title><?php echo get_bloginfo( 'name' ); ?></title>
 		<style>
 			@import url(http://fonts.googleapis.com/css?family=Lato:400,900);
 			<?php wc_get_template( 'emails/email-styles.php');?>
+			#template_container {
+				max-width: 640px;
+			}
 			#template-selector form,
 			#template-selector a.logo,
 			#template-selector .template-row,
@@ -27,6 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				display: block;
 				margin: 0.75em 0;
 			}
+			
 			#template-selector {
 				background: #333;
 				color: white;
@@ -34,27 +41,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 				padding: 0 2rem 1rem 2rem;
 				font-family: 'Lato', sans-serif;
 				font-weight: 400;
+				border: 4px solid #5D5D5D;
+				border-width: 0 0 4px 0;
 			}
+			
 			#template-selector a.logo {
 				display: inline-block;
 				position: relative;
 				top: 1.5em;
+				margin: 1em 0 2em;
 			}
 			#template-selector a.logo img {
 				max-height: 5em;
 			}
-
-			@media screen and (min-width: 480px) {
-			#template-selector .template-row,
-			#template-selector .order-row {
-					display: inline-block;
-			}
-
-			#template-selector form {
-				display: inline-block;
-				line-height: 3;
-			}
-
+			
 			#template-selector a.logo p {
 				display: none;
 				float: left;
@@ -62,7 +62,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				width: 16em;
 				top: 4.5em;
 				padding: 2em;
-				left: 0.25em;
+				left: -8em;
 				background: white;
 				opacity: 0;
 				border: 2px solid #777;
@@ -71,19 +71,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 				line-height: 1.8;
 				transition: all 500ms ease-in-out;
 			}
-
+			
 			#template-selector a.logo:hover p {
-				-webkit-transition: all 500ms ease-in-out;
-				-moz-transition: all 500ms ease-in-out;
-				-ms-transition: all 500ms ease-in-out;
-				-o-transition: all 500ms ease-in-out;
-				transition: all 500ms ease-in-out;
+				display: block;
 				opacity: 1;
 			}
-
+			
 			#template-selector a.logo p:after, #template-selector a.logo p:before {
 				bottom: 100%;
-				left: 10%;
+				left: 50%;
 				border: solid transparent;
 				content: " ";
 				height: 0;
@@ -129,6 +125,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 			#template-selector .choose-order {
 				display: none;
 			}
+
+			@media screen and (min-width: 1100px) {
+				#template-selector .template-row,
+				#template-selector .order-row {
+						display: inline-block;
+				}
+
+				#template-selector form {
+					display: inline-block;
+					line-height: 3;
+				}
+
+				#template-selector a.logo p {
+					width: 16em;
+					top: 4.5em;
+					left: 0.25em;
+				}
+				
+				#template-selector a.logo p:after, #template-selector a.logo p:before {
+					left: 10%;
+				}
 			}
 		</style>
 	</head>
@@ -144,11 +161,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	                			}
 	                		?>
 						</div>
-                    	<table border="0" cellpadding="0" cellspacing="0" width="600" id="template_container">
+                    	<table border="0" cellpadding="0" cellspacing="0" width="80%" id="template_container">
                         	<tr>
                             	<td align="center" valign="top">
                                     <!-- Header -->
-                                	<table border="0" cellpadding="0" cellspacing="0" width="600" id="template_header">
+                                	<table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_header">
                                         <tr>
                                             <td>
                                             	<h1><?php echo $email_heading; ?></h1>
@@ -161,7 +178,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                         	<tr>
                             	<td align="center" valign="top">
                                     <!-- Body -->
-                                	<table border="0" cellpadding="0" cellspacing="0" width="600" id="template_body">
+                                	<table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_body">
                                     	<tr>
                                             <td valign="top" id="body_content">
                                                 <!-- Content -->

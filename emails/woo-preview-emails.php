@@ -12,7 +12,7 @@ function wordimpress_preview_woo_emails() {
 		$default_path = WC()->plugin_path() . '/templates/';
 
         $files = scandir($default_path . 'emails');
-        $exclude = array( '.', '..', 'email-header.php', 'email-footer.php','plain' );
+        $exclude = array( '.', '..', 'email-header.php', 'email-footer.php','email-styles.php', 'email-order-items.php', 'email-addresses.php','plain' );
 		$list = array_diff($files, $exclude);
         ?>
 		<div id="template-selector">
