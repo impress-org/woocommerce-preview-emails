@@ -20,6 +20,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<style>
 			@import url(http://fonts.googleapis.com/css?family=Lato:400,900);
 			<?php wc_get_template( 'emails/email-styles.php');?>
+			#template-selector form,
+			#template-selector a.logo,
+			#template-selector .template-row,
+			#template-selector .order-row {
+				display: block;
+				margin: 0.75em 0;
+			}
 			#template-selector {
 				background: #333;
 				color: white;
@@ -27,11 +34,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 				padding: 0 2rem 1rem 2rem;
 				font-family: 'Lato', sans-serif;
 				font-weight: 400;
-				
-			}
-			#template-selector form {
-				display: inline-block;
-				line-height: 3;
 			}
 			#template-selector a.logo {
 				display: inline-block;
@@ -41,6 +43,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 			#template-selector a.logo img {
 				max-height: 5em;
 			}
+
+			@media screen and (min-width: 480px) {
+			#template-selector .template-row,
+			#template-selector .order-row {
+					display: inline-block;
+			}
+
+			#template-selector form {
+				display: inline-block;
+				line-height: 3;
+			}
+
 			#template-selector a.logo p {
 				display: none;
 				float: left;
@@ -57,6 +71,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				line-height: 1.8;
 				transition: all 500ms ease-in-out;
 			}
+
 			#template-selector a.logo:hover p {
 				-webkit-transition: all 500ms ease-in-out;
 				-moz-transition: all 500ms ease-in-out;
@@ -65,6 +80,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				transition: all 500ms ease-in-out;
 				opacity: 1;
 			}
+
 			#template-selector a.logo p:after, #template-selector a.logo p:before {
 				bottom: 100%;
 				left: 10%;
@@ -82,20 +98,24 @@ if ( ! defined( 'ABSPATH' ) ) {
 				border-width: 8px;
 				margin-left: -8px;
 			}
+
 			#template-selector a.logo p:before {
 				border-color: rgba(119, 119, 119, 0);
 				border-bottom-color: #777;
 				border-width: 9px;
 				margin-left: -9px;
 			}
+
 			#template-selector a.logo:hover p {
 				display: block;
 			}
+
 			#template-selector span {
 				font-weight: 900;
 				display: inline-block;
 				margin: 0 1rem;
 			}
+
 			#template-selector select,
 			#template-selector input {
 				background: #e3e3e3;
@@ -104,9 +124,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 				padding: 0.5rem 1rem;
 				border: 0px;
 			}
+
 			#template-selector #order,
 			#template-selector .choose-order {
 				display: none;
+			}
 			}
 		</style>
 	</head>

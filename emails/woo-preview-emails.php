@@ -18,17 +18,21 @@ function wordimpress_preview_woo_emails() {
 		<div id="template-selector">
 			<a href="https://wordimpress.com" target="_blank" class="logo"><img src="<?php echo get_stylesheet_directory_uri();?>/woocommerce/emails/img/wordimpress-icon.png"><p>Impressive Plugins, Themes, and more tutorials like this one.<br /><strong>"Here's to Building the Web!"</strong></p></a>
 			<form method="get" action="<?php echo site_url(); ?>/wp-admin/admin-ajax.php">
-				<input id="setorder" type="hidden" name="order" value="">
-				<input type="hidden" name="action" value="previewemail">
-				<span class="choose-email">Choose your email template: </span>
-				<select name="file" id="email-select">
-					<?php
-					foreach( $list as $item ){ ?>
-						<option value="<?php echo $item; ?>"><?php echo str_replace('.php', '', $item); ?></option>
-					<?php } ?>
-				</select>
-				<span class="choose-order">Choose an order number: </span>
-				<input id="order" type="number" value="102" placeholder="102" onChange="process1(this)">
+				<div class="template-row">
+            <input id="setorder" type="hidden" name="order" value="">
+				    <input type="hidden" name="action" value="previewemail">
+				    <span class="choose-email">Choose your email template: </span>
+    				<select name="file" id="email-select">
+    					<?php
+    					foreach( $list as $item ){ ?>
+    						<option value="<?php echo $item; ?>"><?php echo str_replace('.php', '', $item); ?></option>
+    					<?php } ?>
+    				</select>
+        </div>
+        <div class="order-row">
+				      <span class="choose-order">Choose an order number: </span>
+				      <input id="order" type="number" value="102" placeholder="102" onChange="process1(this)">
+        </div>
 				<input type="submit" value="Go">
 			</form>
 		</div>

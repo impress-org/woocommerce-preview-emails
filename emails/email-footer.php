@@ -73,19 +73,19 @@ $credit = "
 			<script language="javascript">
 			function process1(showed) {
 				document.getElementById("setorder").value = showed.value;
-					$("#ordernum").attr("value", getQueryVariable("order"));	
+					$("#ordernum").attr("value", getQueryVariable("order"));
 			}
 			$(document).ready(function(){
 				$("#email-select").change(function(){
 					$( "select option:selected").each(function(){
-						if(($(this).attr("value")=="customer-completed-order.php") || ($(this).attr("value")=="admin-cancelled-order.php") || ($(this).attr("value")=="admin-new-order.php")){
+						if(($(this).attr("value")=="customer-completed-order.php") || ($(this).attr("value")=="admin-cancelled-order.php") || ($(this).attr("value")=="admin-new-order.php") || ($(this).attr("value")=="customer-invoice.php")){
 							$("#order").show()
 							$(".choose-order").show();
 						} else {
 							$("#order").hide()
 							$(".choose-order").hide();
 						}
-						
+
 					});
 				}).change();
 			});
@@ -100,12 +100,12 @@ $credit = "
 					vars[hash[0]] = hash[1];
 				}
 				return vars;
-				
-				
+
+
 			}
 			var order = getUrlVars()["order"];
 			var file = getUrlVars()["file"];
-				
+
 			$("form input#order").val(decodeURI(order));
 			$('select#email-select').val(decodeURI(file));
 			</script>
