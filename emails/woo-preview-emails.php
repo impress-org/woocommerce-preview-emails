@@ -83,7 +83,6 @@ function add_preview_email_links( $settings ) {
 
 		     isset( $section['type'] ) && 'sectionend' == $section['type']
 		) {
-			http://woocommerce.dev/wp-admin/admin-ajax.php?action=previewemail&file=customer-new-account.php
 			$updated_settings[] = array(
 				'title' => __( 'Preview Email Templates', 'previewemail' ),
 				'type'  => 'title',
