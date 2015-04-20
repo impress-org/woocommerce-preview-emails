@@ -40,8 +40,11 @@ Now you need to require the `woo-preview-emails.php` file in your themes `functi
 * Preview WooCommerce Emails.
 * @author WordImpress.com
 * @url https://github.com/WordImpress/woocommerce-preview-emails
+* If you are using a child-theme, then use get_stylesheet_directory() instead
 */
-$preview = 'woocommerce/emails/woo-preview-emails.php';
+
+$preview = get_template_directory() . '/woocommerce/emails/woo-preview-emails.php';
+
 if(file_exists($preview)) {
     require $preview;
 }
