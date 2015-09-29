@@ -43,7 +43,7 @@ Now you need to require the `woo-preview-emails.php` file in your themes `functi
 * If you are using a child-theme, then use get_stylesheet_directory() instead
 */
 
-$preview = get_template_directory() . '/woocommerce/emails/woo-preview-emails.php';
+$preview = get_stylesheet_directory() . '/woocommerce/emails/woo-preview-emails.php';
 
 if(file_exists($preview)) {
     require $preview;
