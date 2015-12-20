@@ -20,9 +20,25 @@ function wordimpress_preview_woo_emails() {
 			'email-styles.php',
 			'email-order-items.php',
 			'email-addresses.php',
+			'email-customer-details.php',
+			'email-order-details.php',
 			'plain'
 		);
 		$list    = array_diff( $files, $exclude );
+		
+		$woocommerce_orders = new WP_Query( array(
+			'post_type' => 'shop_order',
+			'posts_per_page' => -1,
+			'order' => 'ASC',
+			'post_status' => array( 'wc-processing', 'wc-pending' )
+		) );
+		$order_drop_down_array = array();
+		if( $woocommerce_orders->have_posts() ) {
+			while( $woocommerce_orders->have_posts() ) {
+				$woocommerce_orders->the_post();
+				$order_drop_down_array[get_the_ID()] = get_the_title();
+			}
+		}
 		?>
 		<div id="template-selector">
 			<a href="https://wordimpress.com" target="_blank" class="logo"><img src="<?php echo get_stylesheet_directory_uri(); ?>/woocommerce/emails/img/wordimpress-icon.png">
@@ -44,24 +60,55 @@ function wordimpress_preview_woo_emails() {
 				</div>
 				<div class="order-row">
 					<span class="choose-order">Choose an order number: </span>
-					<input id="order" type="number" value="102" placeholder="102" onChange="process1(this)">
+					<select id="order" onchange="process1(this)" name="order">
+						<?php foreach( $order_drop_down_array as $order_id => $order_name ) { ?>
+							<option value="<?php echo $order_id; ?>" <?php selected( ( ( isset( $_GET['order'] ) ) ? $_GET['order'] : key($order_drop_down_array) ), $order_id ); ?>><?php echo $order_name; ?></option>
+						<?php } ?>
+					</select>
 				</div>
 				<input type="submit" value="Go">
 			</form>
 		</div>
 		<?php
 
-		global $order;
+		global $order, $billing_email;
 
-		$order = new WC_Order( $_GET['order'] );
+		reset( $order_drop_down_array );
+		$order_number = isset( $_GET['order'] ) ? $_GET['order'] : key( $order_drop_down_array );
+		
+		$order = new WC_Order( $order_number );
+		
+		$emails = new WC_Emails();
+		$email_heading = return_wooc_email_heading( $emails->emails, $_GET['file'], $order_number );
+		
+		$user_id = (int) $order->post->post_author;
+		$user_details = get_user_by( 'id', $user_id );
+		
+		// Load the email header on files that don't include it
+		if( in_array( $_GET['file'], array( 'email-customer-details.php', 'email-order-details.php' ) ) ) {
+			wc_get_template( 'emails/email-header.php', array( 
+				'order' => $order, 
+				'email_heading' => $email_heading 
+			) );		
+		}
+		
+		do_action( 'woocommerce_email_before_order_table', $order, false, false );
+		
+		wc_get_template( 'emails/' . $_GET['file'], array( 
+			'order' => $order, 
+			'email_heading' => $email_heading, 
+			'sent_to_admin' => false, 
+			'plain_text' => false, 
+			'email' => $user_details->user_email,
+			'user_login' => $user_details->user_login,
+			'blogname' => get_bloginfo( 'name' ),
+			'customer_note' => $order->customer_note,
+			'partial_refund' => ''
+		) );
 
-		wc_get_template( 'emails/email-header.php', array( 'order' => $order, 'email_heading' => $email_heading ) );
-
-		do_action( 'woocommerce_email_before_order_table', $order, $sent_to_admin, $plain_text  );
-
-		wc_get_template( 'emails/' . $_GET['file'], array( 'order' => $order ) );
-
-		wc_get_template( 'emails/email-footer.php', array( 'order' => $order ) );
+		wc_get_template( 'emails/email-footer.php', array( 
+			'order' => $order 
+		) );
 	}
 }
 
@@ -96,4 +143,22 @@ function add_preview_email_links( $settings ) {
 
 	return $updated_settings;
 
+}
+
+/*
+*	Locate the template, and extract the heading
+*	@returns appropriate heading for the given template
+*/
+function return_wooc_email_heading( $emails_array, $template_name, $order_number ) {
+	// Confirm that the variables are set
+	if( ! $emails_array || ! $template_name ) {
+		return;
+	}	
+	$template_name = str_replace( '.php', '', str_replace( '-', '_', $template_name ) );
+	foreach( $emails_array as $email ) {
+		if( $email->id == $template_name ) {
+			return str_replace( '{order_number}', '#'.$order_number, $email->settings['heading'] );
+		}
+	}	
+	return;
 }

@@ -4,7 +4,7 @@
  *
  * @author 		WooThemes
  * @package 	WooCommerce/Templates/Emails
- * @version     2.0.0
+*  @version     2.3.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -72,26 +72,27 @@ $credit = "
 		 * don't remove it.
 		 */
 		$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-		if (strpos($url,'admin-ajax.php') !== false){ ?>
-			//We need jQuery for some of the preview functionality
+		if (strpos($url,'admin-ajax.php') !== false) { 
+			?>
+			<!-- We need jQuery for some of the preview functionality -->
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 			<script language="javascript">
 			//This sets the order value for the query string
 			function process1(showed) {
 				document.getElementById("setorder").value = showed.value;
-					$("#ordernum").attr("value", getQueryVariable("order"));
+					jQuery("#ordernum").attr("value", getQueryVariable("order"));
 			}
 			// This shows the order field
 			// conditionally based on the select field
-			$(document).ready(function(){
-				$("#email-select").change(function(){
-					$( "select option:selected").each(function(){
-						if(($(this).attr("value")=="customer-completed-order.php") || ($(this).attr("value")=="admin-cancelled-order.php") || ($(this).attr("value")=="admin-new-order.php") || ($(this).attr("value")=="customer-invoice.php")){
-							$("#order").show()
-							$(".choose-order").show();
+			jQuery(document).ready(function(){
+				jQuery("#email-select").change(function(){
+					jQuery( "#email-select option:selected").each(function() {
+						if((jQuery(this).attr("value")=="customer-completed-order.php") || (jQuery(this).attr("value")=="admin-cancelled-order.php") || (jQuery(this).attr("value")=="admin-new-order.php") || (jQuery(this).attr("value")=="customer-invoice.php")){
+							jQuery("#order").show()
+							jQuery(".choose-order").show();
 						} else {
-							$("#order").hide()
-							$(".choose-order").hide();
+							jQuery("#order").hide()
+							jQuery(".choose-order").hide();
 						}
 
 					});
@@ -118,8 +119,8 @@ $credit = "
 			
 			// This populates the fields 
 			// from the data in the query string
-			$("form input#order").val(decodeURI(order));
-			$('select#email-select').val(decodeURI(file));
+			jQuery("form input#order").val(decodeURI(order));
+			jQuery('select#email-select').val(decodeURI(file));
 			</script>
 		<?php } 
 		// Everything below here will be output into the email directly
