@@ -72,8 +72,9 @@ $credit = "
 		 * don't remove it.
 		 */
 		$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-		if (strpos($url,'admin-ajax.php') !== false){ ?>
+		if (strpos($url,'admin-ajax.php') !== false){ 
 			//We need jQuery for some of the preview functionality
+			?>
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 			<script language="javascript">
 			//This sets the order value for the query string
