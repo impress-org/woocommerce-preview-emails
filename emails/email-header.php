@@ -1,10 +1,17 @@
 <?php
 /**
  * Email Header
+ * This template can be overridden by copying it to yourtheme/woocommerce/emails/email-header.php.
  *
- * @author 		WooThemes
- * @package 	WooCommerce/Templates/Emails
- * @version     2.3.0
+ * HOWEVER, on occasion WooCommerce will need to update template files and you (the theme developer).
+ * will need to copy the new files to your theme to maintain compatibility. We try to do this.
+ * as little as possible, but it does happen. When this occurs the version of the template file will.
+ * be bumped and the readme will list any important changes.
+ *
+ * @see 	http://docs.woothemes.com/document/template-structure/
+ * @author  WooThemes
+ * @package WooCommerce/Templates/Emails
+ * @version 2.4.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,14 +19,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<!DOCTYPE html>
+<html dir="<?php echo is_rtl() ? 'rtl' : 'ltr'?>">
 <head>
-<!-- If you delete this meta tag, the ground will open and swallow you. -->
-<meta name="viewport" content="width=device-width" />
+	<meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo( 'charset' ); ?>" />
+	<title><?php echo get_bloginfo( 'name', 'display' ); ?></title>
+	<!-- If you delete the viewport meta tag, the ground will open and swallow you. -->
+	<meta name="viewport" content="width=device-width" />
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title><?php echo get_bloginfo( 'name' ); ?></title>
 		<style>
 			@import url(http://fonts.googleapis.com/css?family=Lato:400,900);
 			<?php 
@@ -167,13 +174,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</head>
     <body <?php echo is_rtl() ? 'rightmargin' : 'leftmargin'; ?>="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
     	<div id="wrapper">
+		    <div id="wrapper" dir="<?php echo is_rtl() ? 'rtl' : 'ltr'?>">
         	<table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%">
             	<tr>
                 	<td align="center" valign="top">
 						<div id="template_header_image">
 	                		<?php
 	                			if ( $img = get_option( 'woocommerce_email_header_image' ) ) {
-	                				echo '<p style="margin-top:0;"><img src="' . esc_url( $img ) . '" alt="' . get_bloginfo( 'name' ) . '" /></p>';
+					                echo '<p style="margin-top:0;"><img src="' . esc_url( $img ) . '" alt="' . get_bloginfo( 'name', 'display' ) . '" /></p>';
 	                			}
 	                		?>
 						</div>
@@ -183,8 +191,8 @@ if ( ! defined( 'ABSPATH' ) ) {
                                     <!-- Header -->
                                 	<table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_header">
                                         <tr>
-                                            <td>
-                                            	<h1><?php echo $email_heading; ?></h1>
+	                                        <td>
+                                            	<h1 id="header_wrapper"><?php echo $email_heading; ?></h1>
                                             </td>
                                         </tr>
                                     </table>
