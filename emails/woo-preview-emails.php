@@ -117,34 +117,14 @@ function wordimpress_preview_woo_emails() {
 }
 
 /*
- *    Extend WC_Email_Setting
- *    in order to add our own
- *    links to the preview
+ *    Display Link at beginning of email settings
  */
-add_filter( 'woocommerce_email_settings', 'add_preview_email_links' );
+add_action( 'woocommerce_email_settings_before', 'add_preview_email_links', 1, 0 );
 
-function add_preview_email_links( $settings ) {
-	$updated_settings = array();
-	foreach ( $settings as $section ) {
-		// at the bottom of the General Options section
+function add_preview_email_links() {
 
-		if ( isset( $section['id'] ) && 'email_recipient_options' == $section['id'] &&
-
-		     isset( $section['type'] ) && 'sectionend' == $section['type']
-		) {
-			$updated_settings[] = array(
-				'title' => __( 'Preview Email Templates', 'previewemail' ),
-				'type'  => 'title',
-				'desc'  => __( '<a href="' . site_url() . '/wp-admin/admin-ajax.php?action=previewemail&file=customer-new-account.php" target="_blank">Click Here to preview all of your Email Templates with Orders</a>.', 'previewemail' ),
-				'id'    => 'email_preview_links'
-			);
-		}
-		$updated_settings[] = $section;
-
-	}
-
-	return $updated_settings;
-
+    echo "<h3>" . __( 'Preview Email Templates', 'previewemail' ) . "</h3>";
+    echo __( '<a href="' . site_url() . '/wp-admin/admin-ajax.php?action=previewemail&file=customer-new-account.php" target="_blank">Click Here to preview all of your Email Templates with Orders</a>.', 'previewemail' );
 }
 
 /*
