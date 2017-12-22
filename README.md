@@ -34,7 +34,7 @@ Clone or download and extract this repository into your theme's `my-theme/woocom
              * wordimpress-icon.png (file)
              
 # STEP 2: Require the file in your functions.php
-Now you need to require the `woo-preview-emails.php` file in your themes `function.php` file. Here is an example:
+Now you need to require the `woo-preview-emails.php` file in your themes `functions.php` file. Here is an example:
 
 ```
 /**
